@@ -745,8 +745,9 @@ img {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
 }
 
 .project {
@@ -754,6 +755,7 @@ img {
   flex-direction: column;
   padding: 0;
   overflow: hidden;
+  min-width: 0;
   border-radius: var(--radius2);
   background:
     radial-gradient(420px 220px at 12% 10%, rgba(55, 183, 255, 0.11), transparent 55%),
@@ -778,45 +780,49 @@ img {
   width: 100%;
   aspect-ratio: 16 / 9;
   flex-shrink: 0;
-  background: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .project-cover::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    transparent 55%,
-    rgba(5, 7, 13, 0.45) 100%
+    transparent 50%,
+    rgba(5, 7, 13, 0.5) 100%
   );
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 .project-cover-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
-  transform: scale(1.001);
 }
 
+/* Кадрирование под разные исходные пропорции — без растягивания, только смещение фокуса */
 .project--preview-landing .project-cover-img {
-  object-position: 48% 42%;
+  object-position: 50% 45%;
 }
 
 .project--preview-portfolio .project-cover-img {
-  object-position: 50% 22%;
+  object-position: 50% 28%;
 }
 
 .project--preview-promo .project-cover-img {
-  object-position: 50% 36%;
+  object-position: 50% 38%;
 }
 
 .project--preview-concept .project-cover-img {
-  object-position: 50% 48%;
+  object-position: 50% 50%;
 }
 
 .project-inner {
